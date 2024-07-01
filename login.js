@@ -33,11 +33,11 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.json();
         })
         .then(data => {
-            if (data.message === 'Erfolgreich eingeloggt') {
-                console.log('Eingeloggt');
-                window.open('https://pr2bm-danial.github.io/tippspiel/tipp.html'); // Beispiel: neueSeite.html durch deine gewünschte Seite ersetzen
+            if (data.token) {
+                localStorage.setItem('token', data.token);  // Token im localStorage speichern
+                window.location.href = 'https://pr2bm-danial.github.io/tippspiel/tipp.html';
             } else {
-                console.log('Erneut versuchen');
+                console.error('Login fehlgeschlagen:', data.message);
             }
         })
         .catch(error => console.error('Fehler:', error));
@@ -61,25 +61,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                // Überprüfe den Content-Type der Antwort
-                const contentType = response.headers.get('content-type');
-                if (contentType && contentType.includes('application/json')) {
-                    return response.json();
-                } else {
-                    throw new Error('Server returned non-JSON data');
-                }
+                return response.json();
             })
             .then(data => {
                 console.log('Erfolgreich registriert:', data.message);
-                // Hier kannst du weitere Aktionen nach erfolgreicher Registrierung ausführen
             })
-            .catch(error => {
-                console.error('Fehler beim Registrieren:', error);
-                // Hier kannst du den Fehler auf der Clientseite behandeln
-            });            
+            .catch(error => console.error('Fehler beim Registrieren:', error));
         } else {
             console.log('Passwörter stimmen nicht überein');
-            // Hier kannst du den Fall behandeln, wenn Passwörter nicht übereinstimmen
         }
     });
 });
