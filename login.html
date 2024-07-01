@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>EM Tippspiel</title>
+    <link rel="stylesheet" href="login.css">
+    <script src="login.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="title">
+            EM 24 Tippspiel
+        </div>
+        <form id="loginForm">
+            <div class="field">
+                <input type="text" required id="username" autocomplete="username">
+                <label>Benutzername</label>
+            </div>
+            <div class="field">
+                <input type="password" required id="password" autocomplete="current-password">
+                <label>Passwort</label>
+            </div>
+            <div class="content"></div>
+            <div class="field">
+                <input type="submit" value="Login" id="submit">
+            </div>
+            <div class="signup-link">
+                Noch kein Konto? <a id="register">Erstelle Eins</a>
+            </div>
+        </form>
+        
+        <form id="registerForm" style="display: none;">
+            <div class="field">
+                <input type="text" required id="newUsername" autocomplete="username">
+                <label>Benutzername</label>
+            </div>
+            <div class="field">
+                <input type="password" required id="newPassword" autocomplete="new-password">
+                <label>Passwort</label>
+            </div>
+            <div class="field">
+                <input type="password" required id="confirmPassword" autocomplete="new-password">
+                <label>Passwort bestätigen</label>
+            </div>
+            <div class="field">
+                <input type="submit" value="Registrieren" id="registerSubmit">
+            </div>
+            <div class="signup-link">
+                Bereits ein Konto? <a id="backToLogin">Zurück zum Login</a>
+            </div>
+    </div>
+</body>
+</html>
