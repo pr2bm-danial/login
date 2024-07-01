@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             if (data.message === 'Erfolgreich eingeloggt') {
                 console.log('Eingeloggt');
-                window.open('https://pr2bm-danial.github.io/note/note1.html'); // Beispiel: neueSeite.html durch deine gewünschte Seite ersetzen
+                window.open('https://pr2bm-danial.github.io/tippspiel/tipp.html'); // Beispiel: neueSeite.html durch deine gewünschte Seite ersetzen
             } else {
                 console.log('Erneut versuchen');
             }
