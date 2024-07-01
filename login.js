@@ -26,15 +26,10 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: JSON.stringify({ username, password })
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Netzwerkfehler - Server antwortet nicht');
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
             if (data.token) {
-                localStorage.setItem('token', data.token);  // Token im localStorage speichern
+                localStorage.setItem('token', data.token);
                 window.location.href = 'https://pr2bm-danial.github.io/tippspiel/tipp.html';
             } else {
                 console.error('Login fehlgeschlagen:', data.message);
@@ -57,14 +52,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 body: JSON.stringify({ username: newUsername, password: newPassword })
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 console.log('Erfolgreich registriert:', data.message);
+                // Nach erfolgreicher Registrierung weitere Aktionen ausführen
             })
             .catch(error => console.error('Fehler beim Registrieren:', error));
         } else {
