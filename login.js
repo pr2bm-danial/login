@@ -26,16 +26,21 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: JSON.stringify({ username, password })
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.token) {
-                localStorage.setItem('token', data.token);
-                window.location.href = 'https://pr2bm-danial.github.io/tippspiel/tipp.html';
-            } else {
-                console.error('Login fehlgeschlagen:', data.message);
-            }
-        })
-        .catch(error => console.error('Fehler:', error));
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Netzwerkfehler - Server antwortet nicht');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.token) {
+                    localStorage.setItem('token', data.token);  // Token im localStorage speichern
+                    window.location.href = 'https://pr2bm-danial.github.io/tippspiel/tipp.html';
+                } else {
+                    console.error('Login fehlgeschlagen:', data.message);
+                }
+            })
+            .catch(error => console.error('Fehler:', error));
     });
 
     registerForm.addEventListener('submit', function (event) {
@@ -52,12 +57,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 body: JSON.stringify({ username: newUsername, password: newPassword })
             })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Erfolgreich registriert:', data.message);
-                // Nach erfolgreicher Registrierung weitere Aktionen ausführen
-            })
-            .catch(error => console.error('Fehler beim Registrieren:', error));
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Erfolgreich registriert:', data.message);
+                    // Nach erfolgreicher Registrierung weitere Aktionen ausführen
+                })
+                .catch(error => console.error('Fehler beim Registrieren:', error));
         } else {
             console.log('Passwörter stimmen nicht überein');
         }
